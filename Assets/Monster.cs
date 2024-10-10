@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Monster : MonoBehaviour
     public Action OnMonsterDeath;
 
     public LocalMonsterData monsterData;
+
+    public Image HPBarImage;
 
     public void Init(string monsterId)
     {
@@ -45,6 +48,9 @@ public class Monster : MonoBehaviour
     {
         currentHp -= hitPower;
         Debug.Log("Monster HP : " + currentHp);
+
+        HPBarImage.fillAmount = (float)currentHp / monsterData.Health;
+
         if (currentHp <= 0)
         {
             Die();
