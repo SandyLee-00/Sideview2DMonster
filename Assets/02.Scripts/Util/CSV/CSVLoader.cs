@@ -6,9 +6,6 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// 데이터 로드해서 딕셔너리로 만들어주는 함수 갖고있는 로더 클래스
-/// Loader에 컴포넌트로 붙혀놓는다.
-/// private 이지만 파일 이름과 변수명 동일하게 쓰려고 _안 붙힌다.
 /// </summary>
 public class CSVLoader : MonoBehaviour
 {
