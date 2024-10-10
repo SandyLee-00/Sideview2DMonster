@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public ObjectPool ObjectPool;
+    /*public ObjectPool ObjectPool;*/
     public Player player;
 
     // TODO : Define에 옮기기
@@ -26,8 +26,9 @@ public class MonsterSpawner : MonoBehaviour
         monsterSpawnPoint.Add(Werebear, new Vector3(5, -2.6f, -1));
         monsterSpawnPoint.Add(Orcrider, new Vector3(5, -2.7f, -1));
 
-        ObjectPool = FindAnyObjectByType<ObjectPool>();
+        /*ObjectPool = FindAnyObjectByType<ObjectPool>();*/
         player = FindAnyObjectByType<Player>();
+        player.OnKillMonster -= SpawnNextMonster;
         player.OnKillMonster += SpawnNextMonster;
 
         InitMonster(Skeleton);
@@ -36,26 +37,29 @@ public class MonsterSpawner : MonoBehaviour
     /// <summary>
     /// 풀에서 갖고오기
     /// setActive, 위치, 죽었을 때 이벤트, 몬스터 데이터, 체력 설정
+    /// TODO : 풀 쓰면 다시 꺼낼 때 유니티 자체가 멈춘다 일단 그냥 생성 삭제하기
     /// </summary>
     /// <param name="MonsterId"></param>
     private void InitMonster(string MonsterId)
     {
-        currentMonster = ObjectPool.InstanciateFromPool(MonsterId);
+        /*currentMonster = ObjectPool.InstanciateFromPool(MonsterId);*/
+
+        currentMonster = ResourceManager.Instance.Instantiate("Monster/" + MonsterId);
         currentMonster.transform.position = monsterSpawnPoint[MonsterId];
 
         // TODO : 몬스터 코드에서 하는게 맞는 것은 옮기기
         Monster monster = currentMonster.GetComponent<Monster>();
+        monster.Init(MonsterId);
 
-        monster.monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[MonsterId];
-        monster.currentHp = monster.monsterData.Health;
-        monster.isMoving = true;
-
+        
     }
 
     private void SpawnNextMonster()
     {
-        ObjectPool.DestroyToPool(currentMonster);
         LocalMonsterData deadMonsterData = currentMonster.GetComponent<Monster>().monsterData;
+        Destroy(currentMonster);
+
+        /*ObjectPool.DestroyToPool(currentMonster);*/
         InitMonster(deadMonsterData.NextMonsterId);
     }
 

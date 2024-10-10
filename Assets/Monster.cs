@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -12,9 +13,11 @@ public class Monster : MonoBehaviour
 
     public LocalMonsterData monsterData;
 
-
-    private void Start()
+    public void Init(string monsterId)
     {
+        monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[monsterId];
+        currentHp = monsterData.Health;
+        isMoving = true;
     }
 
     private void Update()
@@ -27,7 +30,7 @@ public class Monster : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.left * monsterData.Speed * Time.deltaTime);
+        transform.Translate(Vector3.left * monsterData.Speed * 5 * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -30,7 +30,8 @@ public class Player : MonoBehaviour
                     isAttacking = true;
                     targetMonster = hitColliders[i].GetComponent<Monster>();
                     takeDamageCoroutine = StartCoroutine(TakeDamageToMonster());
-                    targetMonster.OnMonsterDeath += () => { isAttacking = false; OnKillMonster?.Invoke(); };
+                    targetMonster.OnMonsterDeath -= KillMonster;
+                    targetMonster.OnMonsterDeath += KillMonster;
                 }
             }
             i++;
@@ -48,11 +49,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void KillMonster()
+    {
+        isAttacking = false;
+        OnKillMonster?.Invoke();
+    }
+
     private IEnumerator TakeDamageToMonster()
     {
         while(true)
         {
-            Debug.Log("TakeDamageToMonster()");
             if (targetMonster != null)
             {
                 targetMonster.TakeDamage(hitPower);
