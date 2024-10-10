@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
+    public ObjectPool ObjectPool;
+
     public Vector2 SkeletonSpawnPoint = new Vector2(5, -2.7f);
     public Vector2 EliteOrcSpawnPoint = new Vector2(5, -2.4f);
     public Vector2 WizardSpawnPoint = new Vector2(5, -2.6f);
@@ -17,19 +19,25 @@ public class MonsterSpawner : MonoBehaviour
     public string Werebear = "MON0004";
     public string Orcrider = "MON0005";
 
-    public List<GameObject> MonsterList = new List<GameObject>();
+    public GameObject currentMonster;
 
     private void Start()
     {
-        /*string id = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[Skeleton].Id;
-        Debug.Log(id);*/
+        ObjectPool = FindAnyObjectByType<ObjectPool>();
 
-        foreach (KeyValuePair<string, LocalMonsterData> monster in DataManager.Instance.ReadOnlyDataSystem.MonsterDic)
-        {
-            GameObject prefab = ResourceManager.Instance.Load<GameObject>($"Prefabs/Monster/{monster.Value.Id}");
-            GameObject monsterObj = Instantiate(prefab);
-            monsterObj.transform.position = SkeletonSpawnPoint;
-            MonsterList.Add(monsterObj);
-        }
+        currentMonster = ObjectPool.InstanciateFromPool(Skeleton);
+        currentMonster.GetComponent<Monster>().OnMonsterDeath += SpawnNextMonster;
     }
+
+    private void SpawnNextMonster()
+    {
+        ObjectPool.DestroyToPool(currentMonster);
+        LocalMonsterData prevMonsterData = currentMonster.GetComponent<Monster>().monsterData;
+
+        currentMonster = ObjectPool.InstanciateFromPool(prevMonsterData.NextMonsterId);
+        Monster monster = currentMonster.GetComponent<Monster>();
+        monster.OnMonsterDeath += SpawnNextMonster;
+        monster.monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[prevMonsterData.NextMonsterId];
+    }
+
 }

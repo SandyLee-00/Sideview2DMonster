@@ -312,7 +312,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1001 &1220818524
+--- !u!1001 &1026343819
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -362,7 +362,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2614436399030135024, guid: 424a9f29e77ef3d418be6ccdb2a03e05, type: 3}
       propertyPath: m_Name
-      value: Monster_Skeleton
+      value: MON0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614436399030135024, guid: 424a9f29e77ef3d418be6ccdb2a03e05, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1007,6 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6983d5cbc8ab944c9abadf3286b11de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectPool: {fileID: 0}
   SkeletonSpawnPoint: {x: 5, y: -2.7}
   EliteOrcSpawnPoint: {x: 5, y: -2.7}
   WizardSpawnPoint: {x: 5, y: -2.7}
@@ -1017,7 +1022,7 @@ MonoBehaviour:
   Wizard: MON0003
   Werebear: MON0004
   Orcrider: MON0005
-  MonsterList: []
+  currentMonster: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1027,4 +1032,4 @@ SceneRoots:
   - {fileID: 2019145296}
   - {fileID: 2141731330}
   - {fileID: 478034525}
-  - {fileID: 1220818524}
+  - {fileID: 1026343819}

@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public float moveSpeed = 2f;
     private bool isMoving = true;
 
-    public int maxHp = 200;
     public int currentHp;
+    public Action OnMonsterDeath;
+
+    public LocalMonsterData monsterData;
+
 
     private void Start()
     {
-        currentHp = maxHp;
+        currentHp = monsterData.Health;
     }
 
     private void Update()
@@ -26,7 +28,7 @@ public class Monster : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.left * monsterData.Speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +51,6 @@ public class Monster : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        OnMonsterDeath?.Invoke();
     }
 }

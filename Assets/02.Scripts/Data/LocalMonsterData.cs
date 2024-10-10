@@ -9,4 +9,6 @@ public class LocalMonsterData
     public string Grade;
     public float Speed;
     public int Health;
+
+    public string NextMonsterId;
 }

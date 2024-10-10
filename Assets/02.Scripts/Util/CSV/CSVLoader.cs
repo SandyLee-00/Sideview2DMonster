@@ -28,6 +28,7 @@ public class CSVLoader : MonoBehaviour
             data.Grade = _tempData[i]["Grade"].ToString();
             data.Speed = float.Parse(_tempData[i]["Speed"].ToString());
             data.Health = int.Parse(_tempData[i]["Health"].ToString());
+            data.NextMonsterId = _tempData[i]["NextMonsterId"].ToString();
             
             dic.Add(data.Id, data);
         }

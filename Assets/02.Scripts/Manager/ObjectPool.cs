@@ -31,7 +31,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject SpawnFromPool(string tag)
+    public GameObject InstanciateFromPool(string tag)
     {
         if (!PoolDictionary.ContainsKey(tag))
         {
@@ -42,5 +42,10 @@ public class ObjectPool : MonoBehaviour
         PoolDictionary[tag].Enqueue(obj);
 
         return obj;
+    }
+
+    public void DestroyToPool(GameObject obj)
+    {
+        obj.SetActive(false);
     }
 }
