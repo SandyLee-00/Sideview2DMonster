@@ -6,12 +6,6 @@ public class MonsterSpawner : MonoBehaviour
 {
     public ObjectPool ObjectPool;
 
-    public Vector2 SkeletonSpawnPoint = new Vector2(5, -2.7f);
-    public Vector2 EliteOrcSpawnPoint = new Vector2(5, -2.4f);
-    public Vector2 WizardSpawnPoint = new Vector2(5, -2.6f);
-    public Vector2 WerebearSpawnPoint = new Vector2(5, -2.6f);
-    public Vector2 OrcriderSpawnPoint = new Vector2(5, -2.7f);
-
     // TODO : Define에 옮기기
     public string Skeleton = "MON0001";
     public string EliteOrc = "MON0002";
@@ -21,23 +15,42 @@ public class MonsterSpawner : MonoBehaviour
 
     public GameObject currentMonster;
 
+    public Dictionary<string, Vector2> monsterSpawnPoint = new Dictionary<string, Vector2>();
+
     private void Start()
     {
+        monsterSpawnPoint.Add(Skeleton, new Vector2(5, -2.7f));
+        monsterSpawnPoint.Add(EliteOrc, new Vector2(5, -2.4f));
+        monsterSpawnPoint.Add(Wizard, new Vector2(5, -2.6f));
+        monsterSpawnPoint.Add(Werebear, new Vector2(5, -2.6f));
+        monsterSpawnPoint.Add(Orcrider, new Vector2(5, -2.7f));
+
         ObjectPool = FindAnyObjectByType<ObjectPool>();
 
-        currentMonster = ObjectPool.InstanciateFromPool(Skeleton);
-        currentMonster.GetComponent<Monster>().OnMonsterDeath += SpawnNextMonster;
+        InitMonster(Skeleton);
+    }
+
+    /// <summary>
+    /// 풀에서 갖고오기
+    /// setActive, 위치, 죽었을 때 이벤트, 몬스터 데이터, 체력 설정
+    /// </summary>
+    /// <param name="MonsterId"></param>
+    private void InitMonster(string MonsterId)
+    {
+        currentMonster = ObjectPool.InstanciateFromPool(MonsterId);
+        currentMonster.transform.position = monsterSpawnPoint[MonsterId];
+        Monster monster = currentMonster.GetComponent<Monster>();
+        monster.OnMonsterDeath += SpawnNextMonster;
+        monster.monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[MonsterId];
+        monster.currentHp = monster.monsterData.Health;
+
     }
 
     private void SpawnNextMonster()
     {
         ObjectPool.DestroyToPool(currentMonster);
-        LocalMonsterData prevMonsterData = currentMonster.GetComponent<Monster>().monsterData;
-
-        currentMonster = ObjectPool.InstanciateFromPool(prevMonsterData.NextMonsterId);
-        Monster monster = currentMonster.GetComponent<Monster>();
-        monster.OnMonsterDeath += SpawnNextMonster;
-        monster.monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[prevMonsterData.NextMonsterId];
+        LocalMonsterData deadMonsterData = currentMonster.GetComponent<Monster>().monsterData;
+        InitMonster(deadMonsterData.NextMonsterId);
     }
 
 }

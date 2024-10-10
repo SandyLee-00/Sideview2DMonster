@@ -15,7 +15,6 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
-        currentHp = monsterData.Health;
     }
 
     private void Update()

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public int hitPower = 100;
     public Monster targetMonster;
     public Coroutine takeDamageCoroutine;
+    public bool isAttacking = false;
 
     private void FixedUpdate()
     {
@@ -20,8 +21,11 @@ public class Player : MonoBehaviour
         int i = 0;
         while (i < hitColliders.Length)
         {
+            isAttacking = false;
             if (hitColliders[i].CompareTag("Monster"))
             {
+                isAttacking = true;
+
                 if (takeDamageCoroutine == null)
                 {
                     targetMonster = hitColliders[i].GetComponent<Monster>();
@@ -31,8 +35,9 @@ public class Player : MonoBehaviour
             i++;
         }
 
-        if (hitColliders.Length == 0)
+        if (isAttacking == false)
         {
+            isAttacking = false;
             targetMonster = null;
             if (takeDamageCoroutine != null)
             {
@@ -51,6 +56,10 @@ public class Player : MonoBehaviour
             {
                 targetMonster.TakeDamage(hitPower);
                 yield return new WaitForSeconds(1f);
+            }
+            else
+            {
+                yield break;
             }
         }
     }
