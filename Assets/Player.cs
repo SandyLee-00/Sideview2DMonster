@@ -21,23 +21,22 @@ public class Player : MonoBehaviour
         int i = 0;
         while (i < hitColliders.Length)
         {
-            isAttacking = false;
             if (hitColliders[i].CompareTag("Monster"))
             {
-                isAttacking = true;
-
-                if (takeDamageCoroutine == null)
+                if (isAttacking == false)
                 {
+                    isAttacking = true;
                     targetMonster = hitColliders[i].GetComponent<Monster>();
                     takeDamageCoroutine = StartCoroutine(TakeDamageToMonster());
+                    targetMonster.OnMonsterDeath += () => { isAttacking = false; };
                 }
             }
             i++;
         }
 
+        // TODO : 굳이 매 프레임마다?
         if (isAttacking == false)
         {
-            isAttacking = false;
             targetMonster = null;
             if (takeDamageCoroutine != null)
             {
@@ -51,15 +50,11 @@ public class Player : MonoBehaviour
     {
         while(true)
         {
-            Debug.Log("TakeDamageToMonster");
+            Debug.Log("TakeDamageToMonster()");
             if (targetMonster != null)
             {
                 targetMonster.TakeDamage(hitPower);
                 yield return new WaitForSeconds(1f);
-            }
-            else
-            {
-                yield break;
             }
         }
     }

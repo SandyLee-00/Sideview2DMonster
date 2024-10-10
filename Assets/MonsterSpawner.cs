@@ -15,15 +15,15 @@ public class MonsterSpawner : MonoBehaviour
 
     public GameObject currentMonster;
 
-    public Dictionary<string, Vector2> monsterSpawnPoint = new Dictionary<string, Vector2>();
+    public Dictionary<string, Vector3> monsterSpawnPoint = new Dictionary<string, Vector3>();
 
     private void Start()
     {
-        monsterSpawnPoint.Add(Skeleton, new Vector2(5, -2.7f));
-        monsterSpawnPoint.Add(EliteOrc, new Vector2(5, -2.4f));
-        monsterSpawnPoint.Add(Wizard, new Vector2(5, -2.6f));
-        monsterSpawnPoint.Add(Werebear, new Vector2(5, -2.6f));
-        monsterSpawnPoint.Add(Orcrider, new Vector2(5, -2.7f));
+        monsterSpawnPoint.Add(Skeleton, new Vector3(1, -2.7f, -1));
+        monsterSpawnPoint.Add(EliteOrc, new Vector3(5, -2.4f, -1));
+        monsterSpawnPoint.Add(Wizard, new Vector3(5, -2.6f, -1));
+        monsterSpawnPoint.Add(Werebear, new Vector3(5, -2.6f, -1));
+        monsterSpawnPoint.Add(Orcrider, new Vector3(5, -2.7f, -1));
 
         ObjectPool = FindAnyObjectByType<ObjectPool>();
 
@@ -39,10 +39,13 @@ public class MonsterSpawner : MonoBehaviour
     {
         currentMonster = ObjectPool.InstanciateFromPool(MonsterId);
         currentMonster.transform.position = monsterSpawnPoint[MonsterId];
+
+        // TODO : 몬스터 코드에서 하는게 맞는 것은 옮기기
         Monster monster = currentMonster.GetComponent<Monster>();
         monster.OnMonsterDeath += SpawnNextMonster;
         monster.monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[MonsterId];
         monster.currentHp = monster.monsterData.Health;
+        monster.isMoving = true;
 
     }
 

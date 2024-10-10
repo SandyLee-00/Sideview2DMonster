@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPower: 100
   targetMonster: {fileID: 0}
+  isAttacking: 0
 --- !u!4 &478034525
 Transform:
   m_ObjectHideFlags: 0
@@ -1011,12 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6983d5cbc8ab944c9abadf3286b11de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectPool: {fileID: 0}
-  SkeletonSpawnPoint: {x: 5, y: -2.7}
-  EliteOrcSpawnPoint: {x: 5, y: -2.7}
-  WizardSpawnPoint: {x: 5, y: -2.7}
-  WerebearSpawnPoint: {x: 5, y: -2.7}
-  OrcriderSpawnPoint: {x: 5, y: -2.7}
+  ObjectPool: {fileID: 2019145297}
   Skeleton: MON0001
   EliteOrc: MON0002
   Wizard: MON0003

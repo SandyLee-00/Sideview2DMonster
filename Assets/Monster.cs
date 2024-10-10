@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    private bool isMoving = true;
+    public bool isMoving = true;
 
     public int currentHp;
     public Action OnMonsterDeath;
@@ -38,14 +38,16 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int hitPower)
+    public bool TakeDamage(int hitPower)
     {
         currentHp -= hitPower;
         Debug.Log("Monster HP : " + currentHp);
         if (currentHp <= 0)
         {
             Die();
+            return true;
         }
+        return false;
     }
 
     private void Die()
