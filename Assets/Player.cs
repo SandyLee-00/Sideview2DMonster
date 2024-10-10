@@ -4,14 +4,54 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    void Start()
+    public int hitPower = 100;
+    public Monster targetMonster;
+    public Coroutine takeDamageCoroutine;
+
+    private void FixedUpdate()
     {
-        
+        FindMonsterCollider();
     }
 
-    // Update is called once per frame
-    void Update()
+    // TODO : Fixed에서 계속 호출 줄이기 
+    private void FindMonsterCollider()
     {
-        
+        Collider[] hitColliders = Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            if (hitColliders[i].CompareTag("Monster"))
+            {
+                if (takeDamageCoroutine == null)
+                {
+                    targetMonster = hitColliders[i].GetComponent<Monster>();
+                    takeDamageCoroutine = StartCoroutine(TakeDamageToMonster());
+                }
+            }
+            i++;
+        }
+
+        if (hitColliders.Length == 0)
+        {
+            targetMonster = null;
+            if (takeDamageCoroutine != null)
+            {
+                StopCoroutine(takeDamageCoroutine);
+                takeDamageCoroutine = null;
+            }
+        }
+    }
+
+    private IEnumerator TakeDamageToMonster()
+    {
+        while(true)
+        {
+            Debug.Log("TakeDamageToMonster");
+            if (targetMonster != null)
+            {
+                targetMonster.TakeDamage(hitPower);
+                yield return new WaitForSeconds(1f);
+            }
+        }
     }
 }
