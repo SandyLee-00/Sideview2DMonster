@@ -10,6 +10,7 @@ public class MonsterSpawner : MonoBehaviour
     public Vector2 WerebearSpawnPoint = new Vector2(5, -2.6f);
     public Vector2 OrcriderSpawnPoint = new Vector2(5, -2.7f);
 
+    // TODO : Define에 옮기기
     public string Skeleton = "MON0001";
     public string EliteOrc = "MON0002";
     public string Wizard = "MON0003";
@@ -23,7 +24,7 @@ public class MonsterSpawner : MonoBehaviour
         /*string id = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[Skeleton].Id;
         Debug.Log(id);*/
 
-        foreach (var monster in DataManager.Instance.ReadOnlyDataSystem.MonsterDic)
+        foreach (KeyValuePair<string, LocalMonsterData> monster in DataManager.Instance.ReadOnlyDataSystem.MonsterDic)
         {
             GameObject prefab = ResourceManager.Instance.Load<GameObject>($"Prefabs/Monster/{monster.Value.Id}");
             GameObject monsterObj = Instantiate(prefab);
