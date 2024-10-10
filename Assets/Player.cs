@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     public Monster targetMonster;
     public Coroutine takeDamageCoroutine;
     public bool isAttacking = false;
+    public Action OnKillMonster;
 
     private void FixedUpdate()
     {
@@ -28,7 +30,7 @@ public class Player : MonoBehaviour
                     isAttacking = true;
                     targetMonster = hitColliders[i].GetComponent<Monster>();
                     takeDamageCoroutine = StartCoroutine(TakeDamageToMonster());
-                    targetMonster.OnMonsterDeath += () => { isAttacking = false; };
+                    targetMonster.OnMonsterDeath += () => { isAttacking = false; OnKillMonster?.Invoke(); };
                 }
             }
             i++;

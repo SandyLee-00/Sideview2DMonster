@@ -5,6 +5,7 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     public ObjectPool ObjectPool;
+    public Player player;
 
     // TODO : Define에 옮기기
     public string Skeleton = "MON0001";
@@ -26,6 +27,8 @@ public class MonsterSpawner : MonoBehaviour
         monsterSpawnPoint.Add(Orcrider, new Vector3(5, -2.7f, -1));
 
         ObjectPool = FindAnyObjectByType<ObjectPool>();
+        player = FindAnyObjectByType<Player>();
+        player.OnKillMonster += SpawnNextMonster;
 
         InitMonster(Skeleton);
     }
@@ -42,7 +45,7 @@ public class MonsterSpawner : MonoBehaviour
 
         // TODO : 몬스터 코드에서 하는게 맞는 것은 옮기기
         Monster monster = currentMonster.GetComponent<Monster>();
-        monster.OnMonsterDeath += SpawnNextMonster;
+
         monster.monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[MonsterId];
         monster.currentHp = monster.monsterData.Health;
         monster.isMoving = true;
