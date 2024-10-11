@@ -42,6 +42,8 @@ public class UIPopup_FirebaseLogin : MonoBehaviour
     private void CreateAccount()
     {
         FirebaseAuthManager.Instance.CreateAccount(EmailInputField.text, PasswordInputField.text);
+
+        DataManager.Instance.ServerDataSystem.CreateUser();
     }
 
     private void Login()
