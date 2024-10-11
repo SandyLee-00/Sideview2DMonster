@@ -21,8 +21,11 @@ public class UIPopup_MonsterInfo : MonoBehaviour
         });
     }
 
-    private void Init(GameObject monster)
+    public void Init(GameObject monster)
     {
+        Time.timeScale = 0f;
+        gameObject.SetActive(true);
+
         LocalMonsterData monsterData = monster.GetComponent<Monster>().monsterData;
         NameText.text = monsterData.Name;
         GradeText.text = monsterData.Grade;

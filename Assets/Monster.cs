@@ -15,7 +15,7 @@ public class Monster : MonoBehaviour
     public LocalMonsterData monsterData;
 
     public Image HPBarImage;
-
+    
     public void Init(string monsterId)
     {
         monsterData = DataManager.Instance.ReadOnlyDataSystem.MonsterDic[monsterId];
@@ -62,5 +62,12 @@ public class Monster : MonoBehaviour
     private void Die()
     {
         OnMonsterDeath?.Invoke();
+    }
+
+    private void OnMouseDown()
+    {
+        // TODO : Find로 찾아버리는 부분 수정
+        
+        GameManager.Instance.UIPopup_MonsterInfo.Init(this.gameObject);
     }
 }

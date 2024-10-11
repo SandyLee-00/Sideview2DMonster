@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public UIPopup_MonsterInfo UIPopup_MonsterInfo;
+
     protected override void Awake()
     {
         _isDontDestroyOnLoad = true;
@@ -13,5 +15,7 @@ public class GameManager : Singleton<GameManager>
     protected override void Start()
     {
         base.Start();
+
+        
     }
 }

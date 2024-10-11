@@ -313,6 +313,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &608183552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 608183554}
+  - component: {fileID: 608183553}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &608183553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608183552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87038e2114c941d4d9ba77735753c747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIPopup_MonsterInfo: {fileID: 1545114324}
+--- !u!4 &608183554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608183552}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.28950077, y: -0.27857623, z: 0.024307232}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849060083
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +487,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 424a9f29e77ef3d418be6ccdb2a03e05, type: 3}
+--- !u!114 &1545114324 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7509409623651702707, guid: 469a92727e370a34a912df0499637894, type: 3}
+  m_PrefabInstance: {fileID: 6768993903154746315}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e46abf0f3c5554d9f83e597af57fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1757409152
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,7 +1048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2019145296
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,6 +1235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIPopup_MonsterInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 8630848256988782076, guid: 469a92727e370a34a912df0499637894, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1196,3 +1256,4 @@ SceneRoots:
   - {fileID: 1026343819}
   - {fileID: 6768993903154746315}
   - {fileID: 849060086}
+  - {fileID: 608183554}
