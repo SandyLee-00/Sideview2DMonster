@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,11 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public UIPopup_MonsterInfo UIPopup_MonsterInfo;
+
+    public UIScene_MainScene UIScene_MainScene;
+    public int KillMonsterCount = 0;
+
+    public Player Player;
 
     protected override void Awake()
     {
@@ -16,6 +22,16 @@ public class GameManager : Singleton<GameManager>
     {
         base.Start();
 
-        
+        if(Player == null)
+        {
+            Player = FindObjectOfType<Player>();
+        }
+        Player.OnKillMonster += OnPlayerKillMonster;
+    }
+
+    private void OnPlayerKillMonster()
+    {
+        KillMonsterCount++;
+        UIScene_MainScene.SetKillMonsterText(KillMonsterCount);
     }
 }

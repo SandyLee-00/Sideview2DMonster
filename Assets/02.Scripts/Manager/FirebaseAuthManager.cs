@@ -15,6 +15,12 @@ public class FirebaseAuthManager : Singleton<FirebaseAuthManager>
 
     public Action<bool> LoginState;
 
+    protected override void Awake()
+    {
+        _isDontDestroyOnLoad = true;
+        base.Awake();
+    }
+
     public void Init()
     {
         auth = FirebaseAuth.DefaultInstance;

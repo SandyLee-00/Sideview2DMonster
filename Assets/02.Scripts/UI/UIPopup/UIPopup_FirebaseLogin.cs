@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIPopup_FirebaseLogin : MonoBehaviour
@@ -17,9 +18,8 @@ public class UIPopup_FirebaseLogin : MonoBehaviour
 
     public void Start()
     {
-        // TODO : Init 전에 이벤트 등록? 확인해보기
-        FirebaseAuthManager.Instance.LoginState += OnLoginStateChanged;
         FirebaseAuthManager.Instance.Init();
+        FirebaseAuthManager.Instance.LoginState += OnLoginStateChanged;
 
         CreateAccountButton.onClick.AddListener(CreateAccount);
         LoginButton.onClick.AddListener(Login);
@@ -37,7 +37,6 @@ public class UIPopup_FirebaseLogin : MonoBehaviour
         {
             LoginStateText.text = "로그아웃";
         }
-
     }
 
     private void CreateAccount()
@@ -48,6 +47,8 @@ public class UIPopup_FirebaseLogin : MonoBehaviour
     private void Login()
     {
         FirebaseAuthManager.Instance.Login(EmailInputField.text, PasswordInputField.text);
+
+        SceneManager.LoadScene("MainScene");
     }
 
     private void Logout()
