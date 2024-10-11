@@ -37,7 +37,7 @@ public class MonsterSpawner : MonoBehaviour
     /// <summary>
     /// 풀에서 갖고오기
     /// setActive, 위치, 죽었을 때 이벤트, 몬스터 데이터, 체력 설정
-    /// TODO : 풀 쓰면 다시 꺼낼 때 유니티 자체가 멈춘다 일단 그냥 생성 삭제하기
+    /// TODO : 풀 쓰면 몬스터 다시 꺼낼 때 유니티 자체가 멈춘다 일단 그냥 생성 삭제하기
     /// </summary>
     /// <param name="MonsterId"></param>
     private void InitMonster(string MonsterId)
@@ -50,8 +50,6 @@ public class MonsterSpawner : MonoBehaviour
         // TODO : 몬스터 코드에서 하는게 맞는 것은 옮기기
         Monster monster = currentMonster.GetComponent<Monster>();
         monster.Init(MonsterId);
-
-        
     }
 
     private void SpawnNextMonster()
