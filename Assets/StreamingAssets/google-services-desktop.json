@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668645734570",
+    "project_id": "sideview2dmonster",
+    "storage_bucket": "sideview2dmonster.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668645734570:android:23121717eb3902d64438d3",
+        "android_client_info": {
+          "package_name": "com.sideview2dmonster.test1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBb8dFRM_SjpckqV8dLmSkP2kVh3z4nqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
