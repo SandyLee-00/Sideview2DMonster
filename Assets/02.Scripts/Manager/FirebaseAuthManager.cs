@@ -5,23 +5,44 @@ using Firebase.Auth;
 using UnityEngine.UI;
 using TMPro;
 using Firebase.Extensions;
+using System;
 
-public class FirebaseAuthManager : MonoBehaviour
+public class FirebaseAuthManager : Singleton<FirebaseAuthManager>
 {
     private FirebaseAuth auth;
     private FirebaseUser user;
+    public string UserId => user.UserId;
 
-    public TMP_InputField EmailInputField;
-    public TMP_InputField PasswordInputField;
+    public Action<bool> LoginState;
 
-    private void Awake()
+    public void Init()
     {
         auth = FirebaseAuth.DefaultInstance;
+        auth.StateChanged += OnAuthStateChanged;
     }
 
-    public void CreateAccount()
+    private void OnAuthStateChanged(object sender, System.EventArgs eventArgs)
     {
-        auth.CreateUserWithEmailAndPasswordAsync(EmailInputField.text, PasswordInputField.text).ContinueWith(task =>
+        if (auth.CurrentUser != user)
+        {
+            bool signedIn = (user != auth.CurrentUser && auth.CurrentUser != null);
+            if (!signedIn && user != null)
+            {
+                Debug.Log("Signed out " + user.UserId);
+                LoginState?.Invoke(false);
+            }
+            user = auth.CurrentUser;
+            if (signedIn)
+            {
+                Debug.Log("Signed in " + user.UserId);
+                LoginState?.Invoke(true);
+            }
+        }
+    }
+
+    public void CreateAccount(string email, string passward)
+    {
+        auth.CreateUserWithEmailAndPasswordAsync(email, passward).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
@@ -39,9 +60,9 @@ public class FirebaseAuthManager : MonoBehaviour
         });
     }
 
-    public void Login()
+    public void Login(string email, string passward)
     {
-        auth.SignInWithEmailAndPasswordAsync(EmailInputField.text, PasswordInputField.text).ContinueWith(task =>
+        auth.SignInWithEmailAndPasswordAsync(email, passward).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
