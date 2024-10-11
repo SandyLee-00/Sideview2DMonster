@@ -14,8 +14,10 @@ public class ServerDataSystem
 
     public void Init()
     {
+        // TODO : 디바이스 말고 파이어베이스 로그인한 아이디로 변경
         userId = SystemInfo.deviceUniqueIdentifier;
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
     }
 
     public void CreateUser()
