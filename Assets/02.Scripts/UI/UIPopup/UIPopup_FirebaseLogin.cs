@@ -51,6 +51,7 @@ public class UIPopup_FirebaseLogin : MonoBehaviour
         FirebaseAuthManager.Instance.Login(EmailInputField.text, PasswordInputField.text);
 
         SceneManager.LoadScene("MainScene");
+        DataManager.Instance.ServerDataSystem.LoadUserData();
     }
 
     private void Logout()

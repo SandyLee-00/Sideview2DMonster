@@ -27,11 +27,22 @@ public class GameManager : Singleton<GameManager>
             Player = FindObjectOfType<Player>();
         }
         Player.OnKillMonster += OnPlayerKillMonster;
+
+        StartCoroutine(WaitforLoadUserData());
     }
 
+    // TODO : 로딩 될 때 기다리고 데이터 설정 로드매니저 필요?
+    private IEnumerator WaitforLoadUserData()
+    {
+        yield return new WaitUntil(() => DataManager.Instance.ServerDataSystem.User != null);
+        UIScene_MainScene.SetKillMonsterText(DataManager.Instance.ServerDataSystem.User.KillCount);
+    }
+
+    // TODO : 이벤트로 수정? 
     private void OnPlayerKillMonster()
     {
-        KillMonsterCount++;
-        UIScene_MainScene.SetKillMonsterText(KillMonsterCount);
+        DataManager.Instance.ServerDataSystem.User.KillCount++;
+        UIScene_MainScene.SetKillMonsterText(DataManager.Instance.ServerDataSystem.User.KillCount);
+        DataManager.Instance.ServerDataSystem.SaveUserData();
     }
 }
