@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 406466134}
   - component: {fileID: 406466133}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: EmailInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1792,6 +1792,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231324930}
   m_CullTransparentMesh: 1
+--- !u!1 &1429419198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429419200}
+  - component: {fileID: 1429419199}
+  m_Layer: 0
+  m_Name: FirebaseAuthManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1429419199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429419198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18578dd7c3c4fcf4eb1e3555b991cd82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EmailInputField: {fileID: 0}
+  PasswordInputField: {fileID: 0}
+--- !u!4 &1429419200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429419198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 382.80185, y: 263.73837, z: -2.043327}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1456919062
 GameObject:
   m_ObjectHideFlags: 0
@@ -2819,7 +2865,7 @@ GameObject:
   - component: {fileID: 1913626629}
   - component: {fileID: 1913626628}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: PasswardlInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3507,3 +3553,4 @@ SceneRoots:
   - {fileID: 849060086}
   - {fileID: 608183554}
   - {fileID: 630086767}
+  - {fileID: 1429419200}
